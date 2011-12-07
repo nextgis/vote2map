@@ -18,12 +18,12 @@ from nextgis_elections.models import Party
 def home(request):
     dbsession = DBSession()
 
-    return dict(parties=dbsession.query(Party).all())
+    return dict(parties=dbsession.query(Party).order_by(Party.id).all())
 
 def setup_js(request):
     dbsession = DBSession()
 
-    return dict(parties=dbsession.query(Party).all())
+    return dict(parties=dbsession.query(Party).order_by(Party.id).all())
 
 
 def data(request):
