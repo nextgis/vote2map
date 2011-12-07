@@ -1,5 +1,3 @@
-
-
 NGe.setRenderer = function (renderer, args) {
     if (renderer == undefined) { renderer = 'presence'; };
     if (args == undefined) { args = {}; };
@@ -19,26 +17,51 @@ NGe.setLayerRenderer = function (layer, renderer, args) {
     layer.redraw();  
 };
 
+NGe.colorGradientSteps = function (start, finish, steps) {
+    var splitColor = function (c) {
+        var r = []
+        for (var i=1; i < 6; i = i+2) {
+            r.push(parseInt(c.substr(i, 2), 16));
+        };
+        return r
+    };
+
+    var s_s = splitColor(start);
+    var s_f = splitColor(finish);
+
+    series = [];
+    for (var i=0; i<steps; i++) {
+        r = '#';
+        for (var j=0; j<3; j++) {
+            v = Math.round((1.0 * s_s[j] * (steps - i - 1) / (steps - 1) + 1.0 * s_f[j] * (i) / (steps-1))).toString(16);
+            if (v.length == 1) { v = '0' + v; };
+            r = r + v;
+        };
+        series.push(r);
+    };
+
+    return series;
+};
+
 NGe.render = {};
 
 NGe.render.partyVote = function (layer, args) {
     var items = [];
-    var color_x  = NGe.parties[args.party_id].pal;
 
     for (var i = 0; i < layer.features.length; i += 1) {
         items.push(layer.features[i].attributes.protocol_o.vote_p[args.party_id]);
     };
 
-    console.log(items);
-
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(color_x.length-2);
+    var a = series.getQuantile(8);
     var ranges = series.ranges;
     var class_x = ranges;
 
-    series.setColors(color_x);
+    var colors = NGe.colorGradientSteps(NGe.parties[args.party_id].color, '#eeeeee', series.ranges.length);
+
+    series.setColors(colors);
 
     getClass = function (val, a) {
         for (var i = 0; i < a.length; i += 1) {
@@ -51,8 +74,7 @@ NGe.render.partyVote = function (layer, args) {
     
     var context_x = {
         getColor: function(feature) {
-            color = color_x;
-            return color[getClass(feature.attributes.protocol_o.vote_p[args.party_id], class_x)];
+            return colors[getClass(feature.attributes.protocol_o.vote_p[args.party_id], class_x)];
         }
     };
 
