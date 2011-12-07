@@ -30,16 +30,13 @@
         <div id="map"></div>
         <div id="panel">
             <div>
-                <input type="radio" name="p_select" id="p_votes"><label for="p_votes">Явка и распределение голосов</label>
+                <input type="radio" name="p_select" id="p_votes" checked="yes"><label for="p_votes">Явка и распределение голосов</label>
             </div>
             <hr/>
             %for party in parties:
                 <div>
-                    <input onChange="NGe.setRenderer('partyVote', {party_id: ${party.id}});" type="radio" name="p_select" id="p_party_${party.id}" 
-                    %if party.id == 5:
-                        checked="yes"
-                    %endif
-                    ><label for="p_party_${party.id}">${party.name}</label>
+                    <input onChange="NGe.setRenderer('partyVote', {party_id: ${party.id}});" type="radio" name="p_select" id="p_party_${party.id}">
+                    <label for="p_party_${party.id}">${party.name}</label>
                 </div>
             %endfor
             <div>
