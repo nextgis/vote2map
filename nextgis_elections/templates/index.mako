@@ -7,7 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="${request.static_url('nextgis_elections:static/css/map.css')}" type="text/css">
-    <link rel="stylesheet" href="${request.static_url('nextgis_elections:static/jquery/css/overcast/jquery-ui-1.8.16.custom.css')}" type="text/css">
+    <link rel="stylesheet" href="${request.static_url('nextgis_elections:static/jquery/css/smoothness/jquery-ui-1.8.16.custom.css')}" type="text/css">
  
     <!-- jQuery Tools library -->
     <script src="${request.static_url('nextgis_elections:static/jquery/js/jquery-1.6.2.min.js')}"></script>
