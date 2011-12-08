@@ -3,8 +3,8 @@ NGe.setRenderer = function (renderer, args) {
     if (args == undefined) { args = {}; };
 
     for (var i in NGe.tlayer) {
-        if (i < 4) {
-        NGe.setLayerRenderer(NGe.tlayer[i], renderer, args);
+        if (i <= 4) {
+            NGe.setLayerRenderer(NGe.tlayer[i], renderer, args);
         };
     };
 
@@ -55,11 +55,11 @@ NGe.render.partyVote = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(8);
+    var a = series.getQuantile(6);
     var ranges = series.ranges;
     var class_x = ranges;
 
-    var colors = NGe.colorGradientSteps(NGe.parties[args.party_id].color, '#eeeeee', series.ranges.length);
+    var colors = NGe.colorGradientSteps('#eeeeee', NGe.parties[args.party_id].color, series.ranges.length);
 
     series.setColors(colors);
 
@@ -75,21 +75,42 @@ NGe.render.partyVote = function (layer, args) {
     var context_x = {
         getColor: function(feature) {
             return colors[getClass(feature.attributes.protocol_o.vote_p[args.party_id], class_x)];
+        },
+        getGraphicName: function (feature) {
+            if (feature.attributes.protocol_i == undefined) { return 'circle'; }
+            else { return 'triangle'; };
         }
     };
 
-    var template = {
-        fillOpacity: 0.9,
-        strokeColor: "#ffffff",
-        strokeWidth: 1,
-        strokeOpacity: 0.5,
-        fillColor: "${getColor}"
-    };
+    if (layer == NGe.tlayer[4]) {
+        var template = {
+            graphicName: "${getGraphicName}",
+            pointRadius: 6,
+            strokeWidth: 2,
+            strokeColor: '#464451',
+            fillColor: "${getColor}",
+        };
 
-    var style_x = new OpenLayers.Style(template, {context: context_x});
-    var styleMap_x = new OpenLayers.StyleMap({'default': style_x});
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({pointRadius: 12}, style_x)});
+                
+    } else {
+        var template = {
+            fillOpacity: 0.9,
+            strokeColor: "#ffffff",
+            strokeWidth: 1,
+            strokeOpacity: 0.5,
+            fillColor: "${getColor}"
+        };
+
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({fillColor: '#ffcc99', strokeColor: '#ffa500'}, style_x)});
+    };
     
     layer.styleMap = styleMap_x;
+    
+    var prec = (args.party_id === 3 || args.party_id === 7) ? 2 : 1;
+    $('#legend').html(series.getHtmlLegend(null, 'Доля, %', function(e) {return (100 * e).toFixed(prec)}));
 };
 
 NGe.render.presence = function (layer, args) {
@@ -108,7 +129,7 @@ NGe.render.presence = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(color_x.length-2);
+    var a = series.getQuantile(color_x.length);
     var ranges = series.ranges;
     var class_x = ranges;
 
@@ -139,8 +160,8 @@ NGe.render.presence = function (layer, args) {
     };
 
     var style_x = new OpenLayers.Style(template, {context: context_x});
-    var styleMap_x = new OpenLayers.StyleMap({'default': style_x});
+    var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({fillColor: '#ffcc99', strokeColor: '#ffa500'}, style_x)});
     
     layer.styleMap = styleMap_x;
-      
+    $('#legend').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(1)}));
 };

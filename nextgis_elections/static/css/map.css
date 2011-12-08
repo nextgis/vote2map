@@ -10,8 +10,8 @@ body {
 
 #map {
     position: absolute;
-    left: 8px; top: 8px;
-    width: 500px; height: 500px;
+    left: 8px; top: 25px;
+    width:750px; height: 500px;
     border: 1px solid #CCCCCC;
 
 /*    clear: both;
@@ -22,12 +22,19 @@ body {
     
 */}
 
+.breadcrumbs {
+    font-family: verdana;
+    padding-left: 12px;
+    font-size:0.85em;
+    float:left;
+}
+
 #panel {
     position: absolute;
     left: 508px;
-    top: 8px;
+    top: 25px;
     width: 300px;
-    height: 500px;
+    height: 250px;
     padding: 0 1ex;
 
 /*    cursor: pointer;
@@ -42,17 +49,194 @@ body {
     margin: 5px 5px 0 0;
 }
 
+#legend {
+    position: absolute;
+    left: 770px;
+    top: 260px;
+    width: 300px;
+    padding: 0 1ex;
+
+/*    cursor: pointer;
+    position: absolute;
+    left: 500px;
+    right: 0px;
+    background-color: white;
+    top: 30px;
+*/}
+
+.legend-block {
+    border: 1px solid #555555;
+    display: block;
+    float: left;
+    height: 12px;
+    margin: 0.3em 0.8em 0 0em;
+    width: 20px;
+}
+
+.tooltip {
+    display: none;
+}
+
 #holder {
     z-index: 1887;
     position: absolute;
 }
 
-.tooltip {
-    display: none;
-    z-index: 1888;
-    width: 216px;
-    height: 71px; /* 82 */
-    padding: 1px 1px 0px;
+/* map_popup */
+
+#map_popup {
+    width:400px;
+    font-size:11px;
+    font-family:Arial;
+    z-index:10000;
+}
+
+#map_popup .content {
+    background-color:#FFF;
+    border:1px solid #CCC;
+    margin-top:7px;
+    padding:0 10px;
+    border-radius:6px;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    box-shadow:0 0 3px rgba(0,0,0,0.5);
+    -moz-box-shadow:0 0 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow:0 0 3px rgba(0,0,0,0.5);
+}
+
+#map_popup .content h3 {
+    font-size:13px;
+    font-family:Arial;
+    font-weight:bold;
+    margin:10px 0 5px 0;
+    color:#555;
+}
+
+#map_popup .content a {
+    text-decoration:none;
+    color:#2A2A78;
+    font-weight:bold;
+}
+
+#map_popup .content table {
+    border-collapse:collapse;
+margin:0 0 10px 0;
+}
+
+#map_popup .content table td,
+#map_popup .content table th {
+    padding:5px;
+}
+
+#map_popup .content table td {
+    border-top:1px solid #CCC;
+}
+
+#map_popup .content table td.t {
+    width:40%;
+}
+
+#map_popup .content table td.c {
+    font-weight:bold;
+}
+
+#map_popup .content table th {
+    text-align:left;
+    color:#777;
+}
+
+#map_popup .content p {
+    margin:13px 0;
+    font-style:italic;
+    color:#777;
+}
+
+#map_popup .arrow {
+    position:absolute;
+    border-left:10px solid transparent;
+    border-top:10px solid #FFF;
+    border-right:10px solid transparent;
+    border-bottom:;
+    font-size:0;
+    left:50%;
+    bottom:-9px;
+}
+
+/* panel */
+
+#panel {
+padding-left:10px;
+    width:220px;
+    left:760px;
+}
+
+#panel ul.menu {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+#panel ul.menu li {
+    margin:0;
+    padding:6px 5px;
+    border-bottom:1px solid #CCC;
+    font-size:13px;
+    font-family:Arial;
+    font-weight:11px;
+    cursor:pointer;
+}
+
+#panel ul.menu li label {
+    cursor:pointer;
+}
+
+#panel ul.menu li:hover {
+    background-color:#EEE !important;
+}
+
+#panel ul.menu li.sel {
+    background-color:#DDD !important;
+}
+
+#panel ul.menu li input {
+display:none;
+}
+
+#panel ul.menu li.hr {
+    border-bottom:1px solid #333;
+}
+
+#panel ul.menu li.last {
+    border-bottom:none;
+}
+
+#panel ul.menu li.icon {
+    background:transparent url(election_colors.png) 7px 7px no-repeat;
+    padding-left:28px;
+}
+
+#panel ul.menu li.icon.p_party_2 {
+    background-position:7px -20px;
+}
+
+#panel ul.menu li.icon.p_party_3 {
+    background-position:7px -49px;
+}
+
+#panel ul.menu li.icon.p_party_4 {
+    background-position:7px -77px;
+}
+
+#panel ul.menu li.icon.p_party_5 {
+    background-position:7px -105px;
+}
+
+#panel ul.menu li.icon.p_party_6 {
+    background-position:7px -133px;
+}
+
+#panel ul.menu li.icon.p_party_7 {
+    background-position:7px -161px;
 }
 
 .sprBtnItemInactive, .ldprBtnItemInactive, .patrBtnItemInactive, .kprfBtnItemInactive, .yablBtnItemInactive, .edroBtnItemInactive, .pdelBtnItemInactive {
@@ -68,3 +252,4 @@ body {
     width: 9px;
     height: 9px;
 }
+

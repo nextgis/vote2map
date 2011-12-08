@@ -436,7 +436,7 @@ var geostats = function(a) {
 			return;
 		}
 		
-		var content  = '<span>' + _(lg) + ' : </span><div style="height:15px"></div>';
+		var content  = '<span>' + _(lg) + '  </span><div style="height:1px"></div>';
 		for (i = 0; i < (this.ranges.length); i++) {
 			// check if it has separator or not
 			if(this.ranges[i].indexOf(this.separator) != -1) {
@@ -445,7 +445,8 @@ var geostats = function(a) {
 			} else {
 				var el = fn(this.ranges[i]);
 			}
-			content += '<p><div class="legend-block" style="background-color:' + ccolors[i] + '"></div> : ' + el + '</p>';
+			//content += '<p><div class="legend-block" style="background-color:' + ccolors[i] + '"></div> : ' + el + '</p>';
+			content += '<p><div class="legend-block" style="background-color:' + ccolors[i] + '"></div>' + el + '</p>';
 		}
 		return content;
 	};
