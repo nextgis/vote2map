@@ -13,14 +13,7 @@ body {
     left: 8px; top: 35px;
     width:750px; height: 500px;
     border: 1px solid #CCCCCC;
-
-/*    clear: both;
-    position: relative;
-    top: 20px;
-    width: 500px;
-    height: 500px;
-    
-*/}
+}
 
 .breadcrumb {
     display: block;
@@ -37,14 +30,7 @@ body {
     width: 300px;
     height: 250px;
     padding: 0 1ex;
-
-/*    cursor: pointer;
-    position: absolute;
-    left: 500px;
-    right: 0px;
-    background-color: white;
-    top: 30px;
-*/}
+}
 
 #panel div{
     margin: 5px 5px 0 0;
@@ -56,14 +42,7 @@ body {
     top: 270px;
     width: 300px;
     padding: 0 1ex;
-
-/*    cursor: pointer;
-    position: absolute;
-    left: 500px;
-    right: 0px;
-    background-color: white;
-    top: 30px;
-*/}
+}
 
 .legend-block {
     border: 1px solid #555555;
@@ -81,6 +60,14 @@ body {
 #holder {
     z-index: 1887;
     position: absolute;
+}
+
+
+#help {
+    position: absolute;
+    left: 8px;
+    top: 545px;
+    width: 750px;
 }
 
 /* map_popup */
