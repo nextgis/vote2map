@@ -205,7 +205,7 @@ function showTooltip(f) {
                         <tr>\
                             <th></th>\
                             <th colspan='2'><a href='#'>Подсчёт ЦИК</a></th>\
-                            <th colspan='2'><a href='#'>Независимый подсчет</a></th>\
+                            <th colspan='2'><a href='#'>Протоколы наблюдателей</a></th>\
                         </tr>" + ttContent + "\
                     </table>\
                 </div><span class='arrow'></span></div>"
