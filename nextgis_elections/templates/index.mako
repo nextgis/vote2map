@@ -63,6 +63,8 @@
         Протоколы наблюдателей: <a href="http://nabludatel.org/">Гражданин-наблюдатель</a>, <a href="http://forbes.ru">Forbes</a><br/>
         Картоснова: Участники <a href="http://osm.org/">OpenStreetMap<a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a>
         </p>
+
+        <p><b>Внимание:</b> данные из протоколов наблюдателей в процессе ввода!</p>
     </div>
 
 </body>
