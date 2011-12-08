@@ -34,9 +34,9 @@
         <div id="panel">
             <ul class="menu">
                 <li class="">
-                    <input type="radio" name="p_select" id="p_votes" checked="yes"><label for="p_votes">
-                    Явка и распределение голосов
-                    </label>
+                    <input onChange="NGe.setRenderer('presence', {});"
+                        type="radio" name="p_select" id="p_votes" checked="yes">
+                        <label for="p_votes">Явка и распределение голосов</label>
                 </li>
                 %for party in parties:
                     <li class="icon p_party_${party.id}">
