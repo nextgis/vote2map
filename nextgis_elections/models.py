@@ -45,31 +45,6 @@ class Unit(Base):
         result = dict(id=self.id, name=self.name, level=self.level, parent_id=self.parent_id)
         return result
 
-def unit_setup_search(event, schema_item, bind):
-    bind.execute("ALTER TABLE unit ADD COLUMN search_vector tsvector;")
-    bind.execute("CREATE INDEX unit_search_index ON unit USING gin(search_vector)")
-  
-    bind.execute("""
-    CREATE OR REPLACE FUNCTION unit_tsvector_update_trigger() RETURNS trigger AS $$
-    BEGIN
-        SELECT INTO NEW.search_vector 
-            to_tsvector('russian', COALESCE(unit.name, ''))            
-        FROM unit
-        WHERE unit.id = NEW.id;
-
-        RETURN NEW;
-    END;
-    $$ LANGUAGE 'plpgsql';
-    """);
-
-    bind.execute("""
-      CREATE TRIGGER unit_search_update BEFORE UPDATE OR INSERT
-      ON unit FOR EACH ROW EXECUTE PROCEDURE unit_tsvector_update_trigger();
-    """);
-                                          
-Unit.__table__.append_ddl_listener('after-create', unit_setup_search)
-
-
 class UnitPolygon(Base):
     __tablename__ = 'unit_polygon'
     unit_id = Column(BigInteger, ForeignKey('unit.id'), primary_key=True)

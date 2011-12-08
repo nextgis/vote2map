@@ -107,17 +107,12 @@ def unit_search(request):
 
     )
 
-    if re.match('\d+', q):
-        result = dbsession.query(*fields).filter_by(id_level4=int(q)) \
-            .outerjoin((UnitPolygon, UnitPolygon.unit_id == Unit.id)) \
-            .outerjoin((UnitPoint, UnitPoint.unit_id == Unit.id)) \
-            .all()
-    else:
-        result = dbsession.query(*fields) \
-            .outerjoin((UnitPolygon, UnitPolygon.unit_id == Unit.id)) \
-            .outerjoin((UnitPoint, UnitPoint.unit_id == Unit.id)) \
-            .filter("unit.search_vector @@ plainto_tsquery('russian', :tsquery)") \
-            .params(tsquery=q).limit(10)
+    result = dbsession.query(*fields) \
+        .outerjoin((UnitPolygon, UnitPolygon.unit_id == Unit.id)) \
+        .outerjoin((UnitPoint, UnitPoint.unit_id == Unit.id)) \
+        .filter(Unit.name.ilike('%' + q + '%')) \
+        .order_by(Unit.name).limit(10)
+
 
     rows = []
     for r in result:
