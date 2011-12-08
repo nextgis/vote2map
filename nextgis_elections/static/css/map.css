@@ -2,56 +2,114 @@ body {
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size: small;
     background-color: #FFFFFF;
-    padding:8px;
-    margin:0px;
+    padding:0;
+    margin:0;
 }
 
-#mapcont { }
+#mapcont {
+    padding:15px;
+    margin:0 0 20px 0;
+    border:1px solid #CCC;
+    overflow:hidden;
+    zoom:1;
+    height:auto;
+}
 
 #map {
-    position: absolute;
-    left: 8px; top: 35px;
-    width:750px; height: 500px;
-    border: 1px solid #CCCCCC;
-}
-
-.breadcrumb {
-    display: block;
-    font-family: verdana;
-    padding: 0.5ex 0 0.5ex 0.5ex;
-    font-size:1em;
+    position:relative;
+    width:740px;
+    height:660px;
+    border:0;
     float:left;
 }
 
-#panel {
-    position: absolute;
-    left: 508px;
-    top: 35px;
-    width: 300px;
-    height: 250px;
-    padding: 0 1ex;
+#mapcont h3 {
+    font-family:Georgia,'Times New Roman',Times,serif;
+    font-size:16px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin:0 0 10px 0;
 }
 
-#panel div{
-    margin: 5px 5px 0 0;
+#panel {
+    float:left;
+    position:relative;
+    width:210px;
+    height:660px;
+    padding-left:15px;
+}
+
+#mapcont .legend {
+    border:1px solid #CCC;
+    margin-top:25px
+}
+
+#mapcont .legend h3 {
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:normal;
+    font-family:Arial;
+    padding:5px 7px;
+    margin:0;
+}
+
+#legend_info {
+    border-top:1px solid #CCC;
+    font-size:11px;
+    padding:5px 7px;
+}
+
+#legend_info p.title {
+    font-size:12px;
+    margin:0 0 5px 0;
+}
+
+#legend_info ul.colors {
+    margin:0 0 0 7px;
+    padding:0;
+    list-style:none;
+}
+
+#legend_info ul.colors li {
+    margin:0 0 3px 0;
+    clear:both;
 }
 
 #legend {
-    position: absolute;
-    left: 770px;
-    top: 270px;
-    width: 300px;
-    padding: 0 1ex;
+    display:none;
 }
 
-.legend-block {
-    border: 1px solid #555555;
-    display: block;
-    float: left;
-    height: 12px;
-    margin: 0.3em 0.8em 0 0em;
-    width: 20px;
+#mapcont .legend ul.addition {
+    border-top:1px solid #CCC;
+    margin:0 0 7px 0;
+    padding:0;
+    list-style:none;
 }
+
+#mapcont .legend ul.addition li {
+    font-size:11px;
+    margin:5px 0 0 0;
+    padding-left:35px;
+    background:transparent url(../img/election_legend.png) 0 0 no-repeat;
+}
+
+#mapcont .legend ul.addition li.icon1 {
+    background-position:15px 2px;
+}
+
+#mapcont .legend ul.addition li.icon2 {
+    background-position:15px -22px;
+}
+
+#mapcont .legend-block {
+    display:block;
+    float:left;
+    height:12px;
+    margin:0.1em 0.7em 0 0;
+    width:12px;
+}
+
 
 .tooltip {
     display: none;
@@ -64,19 +122,10 @@ body {
 
 
 #help {
-    position: absolute;
-    left: 8px;
-    top: 545px;
-    width: 750px;
-    font-size: .9em;
-}
-
-#search {
-    display: block;
-    position: absolute;
-    left: 600px;
-    top: 8px;
-    width: 385px;
+    clear: both;
+    padding-top: 4px;
+    width: 650px;
+    font-size: 11px;
 }
 
 /* map_popup */
@@ -164,13 +213,28 @@ margin:0 0 10px 0;
     bottom:-9px;
 }
 
-/* panel */
+/* breadcrumbs */
 
-#panel {
-padding-left:10px;
-    width:220px;
-    left:760px;
+#breadcrumbs {
+    margin:0 0 7px 0;
 }
+
+#breadcrumbs .breadcrumb {
+    color:#2A2A78;
+    margin-right:10px;
+    font-size:12px;
+    font-family:Arial;
+}
+
+/* search */
+
+#search {
+    margin: 10px 0;
+    width: 210px;
+    border: 1px solid #bbb;
+}
+
+/* panel */
 
 #panel ul.menu {
     list-style:none;
@@ -190,9 +254,16 @@ padding-left:10px;
 
 #panel ul.menu li label {
     cursor:pointer;
+    color:#2A2A78;
 }
 
-#panel ul.menu li:hover {
+#panel ul.menu li.title {
+    text-transform:uppercase;
+    font-size:12px;
+    border-bottom:3px solid #CCC;
+}
+
+#panel ul.menu li.switch:hover {
     background-color:#EEE !important;
 }
 
@@ -201,7 +272,7 @@ padding-left:10px;
 }
 
 #panel ul.menu li input {
-display:none;
+    display:none;
 }
 
 #panel ul.menu li.hr {
@@ -240,6 +311,12 @@ display:none;
 #panel ul.menu li.icon.p_party_7 {
     background-position:7px -161px;
 }
+
+#panel ul.menu.activity {
+    margin-top:15px;
+}
+
+
 
 div.olMap {
     z-index: 0;

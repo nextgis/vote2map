@@ -111,7 +111,7 @@ NGe.render.partyVote = function (layer, args) {
     layer.styleMap = styleMap_x;
     
     var prec = (args.party_id === 3 || args.party_id === 7) ? 2 : 1;
-    $('#legend').html(series.getHtmlLegend(null, 'Доля, %', function(e) {return (100 * e).toFixed(prec)}));
+    $('#legend_info').html(series.getHtmlLegend(null, 'Доля, %', function(e) {return (100 * e).toFixed(prec)}));
 };
 
 NGe.render.presence = function (layer, args) {
@@ -183,5 +183,5 @@ NGe.render.presence = function (layer, args) {
     };
     
     layer.styleMap = styleMap_x;
-    $('#legend').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(0)}));
+    $('#legend_info').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(0)}));
 };
