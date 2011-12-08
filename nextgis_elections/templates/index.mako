@@ -33,7 +33,7 @@
         <div id="map"></div>
         <div id="panel">
             <ul class="menu">
-                <li class="">
+                <li class="sel">
                     <input onChange="NGe.setRenderer('presence', {});"
                         type="radio" name="p_select" id="p_votes" checked="yes">
                         <label for="p_votes">Явка и распределение голосов</label>
