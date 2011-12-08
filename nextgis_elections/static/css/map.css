@@ -233,17 +233,72 @@ display:none;
     background-position:7px -161px;
 }
 
-.sprBtnItemInactive, .ldprBtnItemInactive, .patrBtnItemInactive, .kprfBtnItemInactive, .yablBtnItemInactive, .edroBtnItemInactive, .pdelBtnItemInactive {
-    background: #dddddd;
-    border: 2px solid #999999;
-    width: 9px;
-    height: 9px;
+div.olMap {
+    z-index: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: default;
 }
 
-.sprBtnItemActive, .ldprBtnItemActive, .patrBtnItemActive, .kprfBtnItemActive, .yablBtnItemActive, .edroBtnItemActive, .pdelBtnItemActive {
-    background: #ffeedd;
-    border: 2px solid #dddddd;
-    width: 9px;
-    height: 9px;
+.olControlPanPanel {
+    top: 10px;
+    left: 5px;
+}  
+
+.olControlPanPanel div {
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.olControlPanPanel .olControlPanNorthItemInactive {
+    top: 0;
+    left: 9px;
+    background-image: url(../img/dark/north-mini.png);
+}
+.olControlPanPanel .olControlPanSouthItemInactive {
+    top: 36px;
+    left: 9px;
+    background-image: url(../img/dark/south-mini.png);
+}
+.olControlPanPanel .olControlPanWestItemInactive {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    background-image: url(../img/dark/west-mini.png);
+}
+.olControlPanPanel .olControlPanEastItemInactive {
+    top: 18px;
+    left: 18px;
+    background-image: url(../img/dark/east-mini.png);
+}
+
+.olControlZoomPanel {
+    top: 71px;
+    left: 14px;
+} 
+
+.olControlZoomPanel div {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+}
+
+.olControlZoomPanel .olControlZoomInItemInactive {
+    top: 0;
+    left: 0;
+    background-image: url(../img/dark/zoom-plus-mini.png);
+}
+
+.olControlZoomPanel .olControlZoomToMaxExtentItemInactive {
+    display: none;
+}
+
+.olControlZoomPanel .olControlZoomOutItemInactive {
+    top: 18px;
+    left: 0;
+    background-image: url(../img/dark/zoom-minus-mini.png);
 }
 

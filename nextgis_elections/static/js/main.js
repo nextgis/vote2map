@@ -94,13 +94,19 @@ function init() {
     
     
     geojson_format = new OpenLayers.Format.GeoJSON();
-    OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
+    //OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
 
     map = new OpenLayers.Map('map', {
         maxExtent: new OpenLayers.Bounds(4133471.04,7457808.76,4226219.99,7562641.88),
         //restrictedExtent: new OpenLayers.Bounds(4133471.04,7457808.76,4226219.99,7562641.88),
         projection: new OpenLayers.Projection("EPSG:900913"),
-        displayProjection: new OpenLayers.Projection("EPSG:900913")
+        displayProjection: new OpenLayers.Projection("EPSG:900913"),
+        controls: [
+            new OpenLayers.Control.Navigation(),
+            new OpenLayers.Control.PanPanel(),
+            new OpenLayers.Control.ZoomPanel()
+        ],
+        theme: null
     });
     NGe.map = map;
 
