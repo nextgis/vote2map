@@ -328,5 +328,5 @@ NGe.render.abs = function (layer, args) {
     };
     
     layer.styleMap = styleMap_x;
-    $('#legend_info').html(series.getHtmlLegend(null, 'Испорченные бюллетени, %', function(e) {return (100 * e).toFixed(2)}));
+    $('#legend_info').html(series.getHtmlLegend(null, 'Голосование по открепительным, %', function(e) {return (100 * e).toFixed(2)}));
 };
