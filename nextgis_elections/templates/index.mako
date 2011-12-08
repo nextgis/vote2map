@@ -32,11 +32,12 @@
     <div style="width:1000px;margin:0 auto">
 
     <div id="mapcont">
-        <h3>Результаты выборов на столичных избирательных участках.</h3>
+        <h3>Результаты выборов на столичных избирательных участках</h3>
 
         <div id="breadcrumbs">
+            Текущее положение:
             %for i in range(4):
-                <a class="breadcrumb" id="bc_${i+1}" href="#" onClick="NGe.selectBreadcrumb(${i+1});"></a>
+                <a class="breadcrumb" id="bc_${i+1}" href="#" onClick="NGe.selectBreadcrumb(${i+1}); return false;"></a>
             %endfor
         </div>
 
@@ -77,7 +78,7 @@
             </ul>
 
             <ul class="menu activity">
-                <li class="title">Поиск</li>
+                <li class="title">Поиск по УИК или району</li>
                 <input id="search" />
             </ul>
 
@@ -96,12 +97,12 @@
                 </div>
 
                 <ul class="addition">
-                    <li class="icon1">Участки без наблюдателей</li>
-                    <li class="icon2">Участки с независимыми наблюдателями</li>
+                    <li class="icon1">Участки только<br/> с данными ЦИК</li>
+                    <li class="icon2">Участки с копиями протоколов</li>
                 </ul>
             </div>
 
-            <p id="nextgis_logo"><a href="http://nextgis.ru/"><img src="http://nextgis.ru/wp-content/themes/nextgis/images/logo.png" /></a></p>
+            <p id="nextgis_logo"><a href="http://nextgis.ru/"><img src="http://nextgis.ru/wp-content/themes/nextgis/images/logo.png" border="0" width="200" height="43"/></a></p>
                 
         </div>
 

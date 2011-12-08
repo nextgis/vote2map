@@ -316,7 +316,7 @@ $(document).ready(function() {
     
     
     $('#mapcont .menu li').click(function() {
-        $(this).parent().children('li').removeClass('sel');
+        $('.switch').removeClass('sel');
         $(this).addClass('sel');
         $(this).children('input').change();
     });
