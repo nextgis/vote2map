@@ -59,9 +59,9 @@ NGe.render.partyVote = function (layer, args) {
     var ranges = series.ranges;
     var class_x = ranges;
 
-    var colors = NGe.colorGradientSteps('#eeeeee', NGe.parties[args.party_id].color, series.ranges.length);
+    var colors = NGe.colorGradientSteps('#eeeeee', NGe.parties[args.party_id].color, Math.floor(series.ranges.length*2));
 
-    series.setColors(colors);
+    series.setColors(colors.splice(0, series.ranges.length));
 
     getClass = function (val, a) {
         for (var i = 0; i < a.length; i += 1) {
@@ -69,7 +69,8 @@ NGe.render.partyVote = function (layer, args) {
             if (val <= parseFloat(item[1])) {
                 return i;
             }
-        }
+        };
+        return a.length - 1;
     };
     
     var context_x = {
@@ -86,7 +87,7 @@ NGe.render.partyVote = function (layer, args) {
         var template = {
             graphicName: "${getGraphicName}",
             pointRadius: 6,
-            strokeWidth: 2,
+            strokeWidth: 1,
             strokeColor: '#464451',
             fillColor: "${getColor}",
         };
@@ -96,7 +97,7 @@ NGe.render.partyVote = function (layer, args) {
                 
     } else {
         var template = {
-            fillOpacity: 0.9,
+            fillOpacity: 0.75,
             strokeColor: "#ffffff",
             strokeWidth: 1,
             strokeOpacity: 0.5,
@@ -142,7 +143,8 @@ NGe.render.presence = function (layer, args) {
             if (val <= parseFloat(item[1])) {
                 return i;
             }
-        }
+        };
+        return a.length - 1;
     };
     
     var context_x = {
@@ -159,7 +161,7 @@ NGe.render.presence = function (layer, args) {
         var template = {
             graphicName: "${getGraphicName}",
             pointRadius: 6,
-            strokeWidth: 2,
+            strokeWidth: 1,
             strokeColor: '#464451',
             fillColor: "${getColor}",
         };
@@ -169,7 +171,7 @@ NGe.render.presence = function (layer, args) {
                 
     } else {
         var template = {
-            fillOpacity: 0.9,
+            fillOpacity: 0.75,
             strokeColor: "#ffffff",
             strokeWidth: 1,
             strokeOpacity: 0.5,

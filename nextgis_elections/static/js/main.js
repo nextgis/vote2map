@@ -105,7 +105,7 @@ function init() {
     NGe.map = map;
 
     // подложки
-    layerMapnik = new OpenLayers.Layer.OSM.Mapnik("OSM ", {baseLayer: true, attribution: false, opacity: 0.5});
+    layerMapnik = new OpenLayers.Layer.OSM.Mapnik("OSM ", {baseLayer: true, attribution: false, opacity: 1});
     map.addLayer(layerMapnik);
 
    
