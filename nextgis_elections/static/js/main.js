@@ -307,7 +307,6 @@ function showttForMouse(e) {
     if (e.pageX || e.pageY) {
         x = e.pageX;
         y = e.pageY;
-        trigger = api.getTrigger();
         $('.tooltip').css({ 'left': (x - 210) + 'px', 'top': (y - 275) + 'px'});
     }
 }
