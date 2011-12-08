@@ -148,19 +148,37 @@ NGe.render.presence = function (layer, args) {
         getColor: function(feature) {
             color = color_x;
             return color[getClass(fvalue(feature), class_x)];
+        },
+        getGraphicName: function (feature) {
+            if (feature.attributes.protocol_i == undefined) { return 'circle'; }
+            else { return 'triangle'; };
         }
     };
 
-    var template = {
-        fillOpacity: 0.9,
-        strokeColor: "#ffffff",
-        strokeWidth: 1,
-        strokeOpacity: 0.5,
-        fillColor: "${getColor}"
-    };
+    if (layer == NGe.tlayer[4]) {
+        var template = {
+            graphicName: "${getGraphicName}",
+            pointRadius: 6,
+            strokeWidth: 2,
+            strokeColor: '#464451',
+            fillColor: "${getColor}",
+        };
 
-    var style_x = new OpenLayers.Style(template, {context: context_x});
-    var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({fillColor: '#ffcc99', strokeColor: '#ffa500'}, style_x)});
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({pointRadius: 12}, style_x)});
+                
+    } else {
+        var template = {
+            fillOpacity: 0.9,
+            strokeColor: "#ffffff",
+            strokeWidth: 1,
+            strokeOpacity: 0.5,
+            fillColor: "${getColor}"
+        };
+
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({fillColor: '#ffcc99', strokeColor: '#ffa500'}, style_x)});
+    };
     
     layer.styleMap = styleMap_x;
     $('#legend').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(1)}));
