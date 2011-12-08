@@ -71,6 +71,14 @@ body {
     font-size: .9em;
 }
 
+#search {
+    display: block;
+    position: absolute;
+    left: 600px;
+    top: 8px;
+    width: 385px;
+}
+
 /* map_popup */
 
 #map_popup {
@@ -301,4 +309,3 @@ div.olMap {
     left: 0;
     background-image: url(../img/dark/zoom-minus-mini.png);
 }
-

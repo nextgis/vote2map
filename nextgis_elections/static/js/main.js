@@ -74,6 +74,31 @@ NGe.setLevel = function (level, root) {
 
 };
 
+NGe.gotoUnit = function (unit) {
+
+    for (var i in NGe.breadcrumb) {
+        if (i > 1) {
+            NGe.breadcrumb[i] = undefined;
+        };
+    };
+
+    if (unit.level < 4) {
+        NGe.breadcrumb[unit.level] = {
+            name: unit.name,
+            root: unit.id,
+            extent: new OpenLayers.Bounds(unit.extent[0], unit.extent[1], unit.extent[2], unit.extent[3])
+        };
+
+        NGe.selectBreadcrumb(unit.level);
+    } else {
+        NGe.setLevel(4, unit.parent_id);
+        NGe.updateBreadcrumb();
+
+        NGe.map.setCenter(new OpenLayers.LonLat(unit.x, unit.y), 17);
+        NGe.map.redraw();
+    };
+};
+
 var map, api;
 
 
@@ -289,6 +314,7 @@ function showttForMouse(e) {
 
 $(document).ready(function() {
     
+    
     $('#mapcont .menu li').click(function() {
         $(this).parent().children('li').removeClass('sel');
         $(this).addClass('sel');
@@ -297,5 +323,14 @@ $(document).ready(function() {
 
     $('body').bind('mousemove', showttForMouse);
 
-});
+    $('#search').autocomplete({
+            source: NGe.routes.unitSearch + '?srs=900913',
+            minLength: 1,
+            select: function( event, ui ) {
+                if (ui.item) {
+                    NGe.gotoUnit(ui.item);
+                };
+            }
+        });
 
+});
