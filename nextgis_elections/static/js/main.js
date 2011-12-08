@@ -233,22 +233,6 @@ function hideTooltip() {
     api.hide();
 }
 
-//Bread-crumbs
-function putBreadCrumbs(f){
-    var delimiter = ' - ';
-    if (NGe.currentLevel == 2){
-        document.getElementById('bc2').innerHTML = '';
-        document.getElementById('bc3').innerHTML = '';
-    }
-    if (NGe.currentLevel == 3){
-        document.getElementById('bc3').innerHTML = '';
-        document.getElementById('bc2').innerHTML = delimiter + f.attributes.unit.name;
-    }
-    if (NGe.currentLevel == 4){
-        document.getElementById('bc3').innerHTML = delimiter + f.attributes.unit.name;
-    }
-}
-
 function panIntoView(tt) {
 
     var mapWidth  = $('#map').width(),
