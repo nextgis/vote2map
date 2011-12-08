@@ -54,7 +54,6 @@ NGe.setLevel = function (level, root) {
         case 3:
             break;
         case 4:
-            console.log(root);
             break;
     }
 
@@ -155,17 +154,24 @@ function showTooltip(f) {
         coords = f.layer.map.getPixelFromLonLat(f.geometry.getBounds().getCenterLonLat()),
         tX = coords.x,
         tY = coords.y,
-        ttContent = '';
+        ttContent = '',
+        votes_i;
         trigger.css({'left': tX + 'px', 'top': tY + 'px'});
 
         for (var i = 1; i < 8; i += 1) {
+
             ttContent_o = "<tr>\
                               <td class='t'><a href='#'>" + NGe.parties[i].name + "</a></td>\
                               <td class='c'>" + f.attributes.protocol_o.vote_c[i] + "</td>\
                               <td>" + (100 * f.attributes.protocol_o.vote_p[i]).toFixed(2) + "%</td>";
             if (f.attributes.protocol_i !== null) {
-                ttContent_i = "<td>" + f.attributes.protocol_i.vote_c[i] + "</td>\
-                               <td class='c'>" + (100 * f.attributes.protocol_i.vote_p[i]).toFixed(2) + "%</td>\
+                if (f.attributes.protocol_o.vote_c[i] != f.attributes.protocol_i.vote_c[i]) {
+                    votes_i = "<td class='red'>" + f.attributes.protocol_i.vote_c[i] + "</td>";
+                } else {
+                    votes_i = "<td class='c'>" + f.attributes.protocol_i.vote_c[i] + "</td>"
+                }
+                ttContent_i =  votes_i + "\
+                               <td>" + (100 * f.attributes.protocol_i.vote_p[i]).toFixed(2) + "%</td>\
                            </tr>";
                 }
                 else {

@@ -140,6 +140,11 @@ margin:0 0 10px 0;
     font-weight:bold;
 }
 
+#map_popup .content table td.red {
+    font-weight:bold;
+    color: #ff0000;
+}
+
 #map_popup .content table th {
     text-align:left;
     color:#777;
