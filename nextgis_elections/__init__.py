@@ -21,6 +21,8 @@ def main(global_config, **settings):
     config.add_route('data', '/data')
     config.add_view('nextgis_elections.views.data', route_name='data')
 
+    config.add_route('unit.search', '/unit/search')
+    config.add_view('nextgis_elections.views.unit_search', route_name='unit.search', renderer='json')
 
     # config.add_route('home', '/')
     # config.add_view('nextgis_elections.views.my_view',
