@@ -26,24 +26,31 @@
 
 </head>
 <body onload="init()">
+    <div class="breadcrumbs" id="bc1"><a href="#" onclick="NGe.setLevel(2);">г. Москва</a></div>
+    <div class="breadcrumbs" id="bc2"></div>
+    <div class="breadcrumbs" id="bc3"></div>
     <div id="mapcont">
         <div id="map"></div>
         <div id="panel">
-            <div>
-                <input type="radio" name="p_select" id="p_votes" checked="yes"><label for="p_votes">Явка и распределение голосов</label>
-            </div>
-            <hr/>
-            %for party in parties:
-                <div>
-                    <input onChange="NGe.setRenderer('partyVote', {party_id: ${party.id}});" type="radio" name="p_select" id="p_party_${party.id}">
-                    <label for="p_party_${party.id}">${party.name}</label>
-                </div>
-            %endfor
-            <div>
+            <ul class="menu">
+                <li class="">
+                    <input type="radio" name="p_select" id="p_votes" checked="yes"><label for="p_votes">
+                    Явка и распределение голосов
+                    </label>
+                </li>
+                %for party in parties:
+                    <li class="icon p_party_${party.id}">
+                        <input onChange="NGe.setRenderer('partyVote', {party_id: ${party.id}});"
+                            type="radio" name="p_select" id="p_party_${party.id}">
+                        <label for="p_party_${party.id}">${party.name}</label>
+                    </li>
+                %endfor
+            </ul>
                 
-            </div>
         </div>
     </div>
+
+    <div id="legend"></div>
 
     <div id="holder"></div> 
     <div class="tooltip"></div>

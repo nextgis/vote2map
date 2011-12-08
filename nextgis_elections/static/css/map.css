@@ -211,7 +211,7 @@ display:none;
 }
 
 #panel ul.menu li.icon {
-    background:transparent url(election_colors.png) 7px 7px no-repeat;
+    background:transparent url(../img/election_colors.png) 7px 7px no-repeat;
     padding-left:28px;
 }
 
