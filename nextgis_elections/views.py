@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re 
+
 from pyramid.response import Response
 
 from sqlalchemy.orm import aliased
@@ -86,6 +88,52 @@ def data(request):
     else:
         return Response(fcoll, content_type="application/json")
 
-            
+          
+def unit_search(request):
+    
+    q = request.params['term']
+    srs = int(request.params['srs']) if 'srs' in request.params else 4326
+      
+    dbsession = DBSession()
+
+    fields = (
+        Unit,
+        func.st_xmin(func.st_transform(func.st_setsrid(UnitPolygon.geom, 4326), srs)).label('left'),
+        func.st_xmax(func.st_transform(func.st_setsrid(UnitPolygon.geom, 4326), srs)).label('right'),
+        func.st_ymin(func.st_transform(func.st_setsrid(UnitPolygon.geom, 4326), srs)).label('bottom'),
+        func.st_ymax(func.st_transform(func.st_setsrid(UnitPolygon.geom, 4326), srs)).label('top'),
+        func.st_x(func.st_transform(func.st_setsrid(UnitPoint.geom, 4326), srs)).label('x'),
+        func.st_y(func.st_transform(func.st_setsrid(UnitPoint.geom, 4326), srs)).label('y'),
+
+    )
+
+    if re.match('\d+', q):
+        result = dbsession.query(*fields).filter_by(id_level4=int(q)) \
+            .outerjoin((UnitPolygon, UnitPolygon.unit_id == Unit.id)) \
+            .outerjoin((UnitPoint, UnitPoint.unit_id == Unit.id)) \
+            .all()
+    else:
+        result = dbsession.query(*fields) \
+            .outerjoin((UnitPolygon, UnitPolygon.unit_id == Unit.id)) \
+            .outerjoin((UnitPoint, UnitPoint.unit_id == Unit.id)) \
+            .filter("unit.search_vector @@ plainto_tsquery('russian', :tsquery)") \
+            .params(tsquery=q).limit(10)
+
+    rows = []
+    for r in result:
+        itm = r.Unit.as_dict()
+        itm['value'] = r.Unit.name
+
+        if r.left and r.top:
+            itm['extent'] = (r.left, r.bottom, r.right, r.top)
+
+        if r.x and r.y:
+            itm['x'] = r.x
+            itm['y'] = r.y
+
+        rows.append(itm)
+
+    return rows
+
         
 
