@@ -115,7 +115,6 @@ NGe.render.partyVote = function (layer, args) {
 
 NGe.render.presence = function (layer, args) {
     var items = [];
-    var color_x  = ['#e2dee6', '#c2abdd', '#9d87b6', '#735a8f', '#3d2e4e'];
 
     fvalue = function(f) {
         return (f.attributes.protocol_o.b_valid + f.attributes.protocol_o.b_invalid) / f.attributes.protocol_o.b_count;
@@ -129,11 +128,13 @@ NGe.render.presence = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(color_x.length);
+    var a = series.getQuantile(6);
     var ranges = series.ranges;
     var class_x = ranges;
 
-    series.setColors(color_x);
+    var colors = NGe.colorGradientSteps('#e2dee6', '#3d2e4e', series.ranges.length);
+
+    series.setColors(colors);
 
     getClass = function (val, a) {
         for (var i = 0; i < a.length; i += 1) {
@@ -146,8 +147,7 @@ NGe.render.presence = function (layer, args) {
     
     var context_x = {
         getColor: function(feature) {
-            color = color_x;
-            return color[getClass(fvalue(feature), class_x)];
+            return colors[getClass(fvalue(feature), class_x)];
         },
         getGraphicName: function (feature) {
             if (feature.attributes.protocol_i == undefined) { return 'circle'; }
@@ -181,5 +181,5 @@ NGe.render.presence = function (layer, args) {
     };
     
     layer.styleMap = styleMap_x;
-    $('#legend').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(1)}));
+    $('#legend').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(0)}));
 };
