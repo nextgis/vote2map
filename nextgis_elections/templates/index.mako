@@ -26,9 +26,9 @@
 
 </head>
 <body onload="init()">
-    <div class="breadcrumbs" id="bc1"><a href="#" onclick="NGe.setLevel(2);">г. Москва</a></div>
-    <div class="breadcrumbs" id="bc2"></div>
-    <div class="breadcrumbs" id="bc3"></div>
+    %for i in range(4):
+        <a class="breadcrumb" id="bc_${i+1}" href="#" onClick="NGe.selectBreadcrumb(${i+1});"></a>
+    %endfor
     <div id="mapcont">
         <div id="map"></div>
         <div id="panel">

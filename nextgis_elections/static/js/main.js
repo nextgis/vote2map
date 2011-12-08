@@ -1,6 +1,30 @@
 var NGe = {};
 
 NGe.tlayer = {}; // тематические слои по уровням
+NGe.breadcrumb = {}; // данные для навигации
+
+NGe.updateBreadcrumb = function () {
+    for (var i in NGe.breadcrumb) {
+        if (NGe.breadcrumb[i] == undefined) {
+            $('#bc_' + i).html('');
+        } else {
+            $('#bc_' + i).html(NGe.breadcrumb[i].name);
+        };
+    };
+};
+
+NGe.selectBreadcrumb = function (level) {
+    NGe.map.zoomToExtent(NGe.breadcrumb[level].extent);
+    NGe.setLevel(level+1, NGe.breadcrumb[level].root);
+
+    for (var i in NGe.breadcrumb) {
+        if (i > level) {
+            NGe.breadcrumb[i] = undefined;
+        };
+    };
+
+    NGe.updateBreadcrumb();
+};
 
 
 NGe.setLevel = function (level, root) {
@@ -47,27 +71,6 @@ NGe.setLevel = function (level, root) {
 
     NGe.currentLevel = level;
     NGe.currentRoot = root;
-
-    switch (NGe.currentLevel) {
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-    }
-
-	if (NGe.currentLevel == 2) {putBreadCrumbs(); map.zoomToExtent(new OpenLayers.Bounds(4108911.9527615,7430730.8105945,4261786.0093105,7583604.8671435));}
-    /*if (NGe.currentLevel == 3) {
-        var parent_id = NGe.tlayer[4].features[1].attributes.unit.parent_id;
-		for (var i = 0; i < NGe.tlayer[3].features.length; i += 1) {
-		    if (NGe.tlayer[3].features[i].attributes.unit.id == parent_id) {
-			    putBreadCrumbs(NGe.tlayer[3].features[i]);
-				map.zoomToExtent(NGe.tlayer[3].features[i].getBounds());
-				break;
-			}
-		}
-	}*/
 
 };
 
@@ -130,7 +133,13 @@ function init() {
             renderIntent: "default",
             onSelect: function (f) {
                 if (NGe.currentLevel !== 4) {
+                    NGe.breadcrumb[f.attributes.unit.level] = {
+                        name: f.attributes.unit.name,
+                        root: f.attributes.unit.id,
+                        extent: f.geometry.getBounds()
+                    };
                     NGe.setLevel(f.attributes.unit.level+1, f.attributes.unit.id);
+                    NGe.updateBreadcrumb();
                     map.zoomToExtent(f.geometry.getBounds());
                 }
                 hideTooltip();
@@ -145,6 +154,13 @@ function init() {
 
     map.zoomToExtent(new OpenLayers.Bounds(4108911.9527615,7430730.8105945,4261786.0093105,7583604.8671435));
     NGe.setLevel(2);
+
+    NGe.breadcrumb[1] = {
+        name: 'Москва',
+        root: NGe.rootUnit,
+        extent: new OpenLayers.Bounds(4108911.9527615,7430730.8105945,4261786.0093105,7583604.8671435)
+    };
+    NGe.updateBreadcrumb();    
 
 }
 

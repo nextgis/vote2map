@@ -10,7 +10,7 @@ body {
 
 #map {
     position: absolute;
-    left: 8px; top: 25px;
+    left: 8px; top: 35px;
     width:750px; height: 500px;
     border: 1px solid #CCCCCC;
 
@@ -22,17 +22,18 @@ body {
     
 */}
 
-.breadcrumbs {
+.breadcrumb {
+    display: block;
     font-family: verdana;
-    padding-left: 12px;
-    font-size:0.85em;
+    padding: 0.5ex 0 0.5ex 0.5ex;
+    font-size:1em;
     float:left;
 }
 
 #panel {
     position: absolute;
     left: 508px;
-    top: 25px;
+    top: 35px;
     width: 300px;
     height: 250px;
     padding: 0 1ex;
@@ -52,7 +53,7 @@ body {
 #legend {
     position: absolute;
     left: 770px;
-    top: 260px;
+    top: 270px;
     width: 300px;
     padding: 0 1ex;
 
