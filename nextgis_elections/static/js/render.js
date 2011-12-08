@@ -45,6 +45,7 @@ NGe.colorGradientSteps = function (start, finish, steps) {
 
 NGe.render = {};
 
+
 NGe.render.partyVote = function (layer, args) {
     var items = [];
 
@@ -118,7 +119,7 @@ NGe.render.presence = function (layer, args) {
     var items = [];
 
     fvalue = function(f) {
-        return (f.attributes.protocol_o.b_valid + f.attributes.protocol_o.b_invalid) / f.attributes.protocol_o.b_count;
+        return 1.0 * (f.attributes.protocol_o.b_valid + f.attributes.protocol_o.b_invalid) / f.attributes.protocol_o.b_count;
     };
 
 
@@ -184,4 +185,148 @@ NGe.render.presence = function (layer, args) {
     
     layer.styleMap = styleMap_x;
     $('#legend_info').html(series.getHtmlLegend(null, 'Явка, %', function(e) {return (100 * e).toFixed(0)}));
+};
+
+NGe.render.invalid = function (layer, args) {
+    var items = [];
+
+    fvalue = function(f) {
+        return (f.attributes.protocol_o.b_invalid ) / (f.attributes.protocol_o.b_valid + f.attributes.protocol_o.b_invalid);
+    };
+
+
+    for (var fid in layer.features) {
+        items.push(fvalue(layer.features[fid]));
+    };
+
+    if (items.length == 0) {return;};
+    
+    var series = new geostats(items);
+    var a = series.getQuantile(6);
+    var ranges = series.ranges;
+    var class_x = ranges;
+
+    var colors = NGe.colorGradientSteps('#ff99ff', '#ff33ff', series.ranges.length);
+
+    series.setColors(colors);
+
+    getClass = function (val, a) {
+        for (var i = 0; i < a.length; i += 1) {
+            var item = a[i].split(/ - /);
+            if (val <= parseFloat(item[1])) {
+                return i;
+            }
+        };
+        return a.length - 1;
+    };
+    
+    var context_x = {
+        getColor: function(feature) {
+            return colors[getClass(fvalue(feature), class_x)];
+        },
+        getGraphicName: function (feature) {
+            if (feature.attributes.protocol_i == undefined) { return 'circle'; }
+            else { return 'triangle'; };
+        }
+    };
+
+    if (layer == NGe.tlayer[4]) {
+        var template = {
+            graphicName: "${getGraphicName}",
+            pointRadius: 6,
+            strokeWidth: 1,
+            strokeColor: '#464451',
+            fillColor: "${getColor}",
+        };
+
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({pointRadius: 12}, style_x)});
+                
+    } else {
+        var template = {
+            fillOpacity: 0.75,
+            strokeColor: "#ffffff",
+            strokeWidth: 1,
+            strokeOpacity: 0.5,
+            fillColor: "${getColor}"
+        };
+
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({fillColor: '#ffcc99', strokeColor: '#ffa500'}, style_x)});
+    };
+    
+    layer.styleMap = styleMap_x;
+    $('#legend_info').html(series.getHtmlLegend(null, 'Испорченные бюллетени, %', function(e) {return (100 * e).toFixed(2)}));
+};
+
+NGe.render.abs = function (layer, args) {
+    var items = [];
+
+    fvalue = function(f) {
+        return (f.attributes.protocol_o.a_count) / (f.attributes.protocol_o.b_valid + f.attributes.protocol_o.b_invalid);
+    };
+
+
+    for (var fid in layer.features) {
+        items.push(fvalue(layer.features[fid]));
+    };
+
+    if (items.length == 0) {return;};
+    
+    var series = new geostats(items);
+    var a = series.getQuantile(6);
+    var ranges = series.ranges;
+    var class_x = ranges;
+
+    var colors = NGe.colorGradientSteps('#99eeee', '#33eeee', series.ranges.length);
+
+    series.setColors(colors);
+
+    getClass = function (val, a) {
+        for (var i = 0; i < a.length; i += 1) {
+            var item = a[i].split(/ - /);
+            if (val <= parseFloat(item[1])) {
+                return i;
+            }
+        };
+        return a.length - 1;
+    };
+    
+    var context_x = {
+        getColor: function(feature) {
+            return colors[getClass(fvalue(feature), class_x)];
+        },
+        getGraphicName: function (feature) {
+            if (feature.attributes.protocol_i == undefined) { return 'circle'; }
+            else { return 'triangle'; };
+        }
+    };
+
+    if (layer == NGe.tlayer[4]) {
+        var template = {
+            graphicName: "${getGraphicName}",
+            pointRadius: 6,
+            strokeWidth: 1,
+            strokeColor: '#464451',
+            fillColor: "${getColor}",
+        };
+
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({pointRadius: 12}, style_x)});
+                
+    } else {
+        var template = {
+            fillOpacity: 0.75,
+            strokeColor: "#ffffff",
+            strokeWidth: 1,
+            strokeOpacity: 0.5,
+            fillColor: "${getColor}"
+        };
+
+        var style_x = new OpenLayers.Style(template, {context: context_x});
+        var styleMap_x = new OpenLayers.StyleMap({'default': style_x, 'select': OpenLayers.Util.applyDefaults({fillColor: '#ffcc99', strokeColor: '#ffa500'}, style_x)});
+    };
+    
+    layer.styleMap = styleMap_x;
+    $('#legend_info').html(series.getHtmlLegend(null, 'Испорченные бюллетени, %', function(e) {return (100 * e).toFixed(2)}));
 };

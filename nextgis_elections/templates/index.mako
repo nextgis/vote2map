@@ -66,14 +66,14 @@
                         <label for="p_votes">Явка</label>
                 </li>
                 <li class="switch">
-                    <input onChange="NGe.setRenderer('presence', {});"
-                        type="radio" name="p_select" id="p_votes" checked="yes">
-                        <label for="p_votes">Испорченные бюллетени</label>
+                    <input onChange="NGe.setRenderer('invalid', {});"
+                        type="radio" name="p_select" id="p_invalid">
+                        <label for="p_invalid">Испорченные бюллетени</label>
                 </li>
                 <li class="switch">
-                    <input onChange="NGe.setRenderer('presence', {});"
-                        type="radio" name="p_select" id="p_votes" checked="yes">
-                        <label for="p_votes">Голосование по открепительным</label>
+                    <input onChange="NGe.setRenderer('abs', {});"
+                        type="radio" name="p_select" id="p_abs">
+                        <label for="p_abs">Голосование по открепительным</label>
                 </li>
             </ul>
 
