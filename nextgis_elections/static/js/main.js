@@ -195,13 +195,13 @@ function init() {
 
     map.addControls([NGe.cntrlHover, NGe.cntrlSelect]);
 
-    map.zoomToExtent(new OpenLayers.Bounds(4108911.9527615,7430730.8105945,4261786.0093105,7583604.8671435));
+    map.zoomToExtent(new OpenLayers.Bounds(4128800, 7462000, 4241800, 7562800));
     NGe.setLevel(2);
 
     NGe.breadcrumb[1] = {
         name: 'Москва',
         root: NGe.rootUnit,
-        extent: new OpenLayers.Bounds(4108911.9527615,7430730.8105945,4261786.0093105,7583604.8671435)
+        extent: new OpenLayers.Bounds(4128800, 7462000, 4241800, 7562800)
     };
     NGe.updateBreadcrumb();
 
