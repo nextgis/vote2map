@@ -54,7 +54,7 @@ NGe.render.partyVote = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(6);
+    var a = series.getQuantile(5);
     var ranges = series.ranges;
     var class_x = ranges;
 
@@ -128,7 +128,7 @@ NGe.render.presence = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(6);
+    var a = series.getQuantile(5);
     var ranges = series.ranges;
     var class_x = ranges;
 
@@ -200,7 +200,7 @@ NGe.render.invalid = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(6);
+    var a = series.getQuantile(5);
     var ranges = series.ranges;
     var class_x = ranges;
 
@@ -272,7 +272,7 @@ NGe.render.abs = function (layer, args) {
     if (items.length == 0) {return;};
     
     var series = new geostats(items);
-    var a = series.getQuantile(6);
+    var a = series.getQuantile(5);
     var ranges = series.ranges;
     var class_x = ranges;
 
