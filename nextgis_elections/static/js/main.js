@@ -262,7 +262,7 @@ function showTooltip(f) {
 }
 
 function hideTooltip() {
-    api.hide();
+    if (api !== undefined) {api.hide();}
 }
 
 function panIntoView(tt) {
