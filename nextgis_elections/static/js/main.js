@@ -1,4 +1,5 @@
 var NGe = {};
+var map, api, json_format = new OpenLayers.Format.JSON();
 
 NGe.tlayer = {}; // тематические слои по уровням
 NGe.breadcrumb = {}; // данные для навигации
@@ -102,9 +103,23 @@ NGe.gotoUnit = function (unit) {
     };
 };
 
-var map, api;
+NGe.autoLouad = function(item) {
 
+    OpenLayers.Request.GET({
+        url: NGe.routes.unitSearch + '?srs=900913&term=' + item,
+        async: false,
+        success: function (e) {
+            var units = json_format.read(e.responseText);
+            for (var i = 0; i < units.length; i += 1) {
+                if (units[i].name.split('№')[1] === item) {
+                    NGe.gotoUnit(units[i]);
+                    break;
+                }
+            }
+        }
+    });
 
+}
 
 function init() {
 
@@ -119,9 +134,6 @@ function init() {
         tip: $('.tooltip')
     });
     api = trigger.data('tooltip');
-    
-    
-    geojson_format = new OpenLayers.Format.GeoJSON();
 
     map = new OpenLayers.Map('map', {
         maxExtent: new OpenLayers.Bounds(4133471.04,7457808.76,4226219.99,7562641.88),
@@ -140,7 +152,6 @@ function init() {
     layerMapnik = new OpenLayers.Layer.OSM.Mapnik("OSM ", {baseLayer: true, attribution: false, opacity: 1});
     map.addLayer(layerMapnik);
 
-   
     //Контролы
     NGe.cntrlHover = new OpenLayers.Control.SelectFeature(
         [], {
@@ -192,8 +203,11 @@ function init() {
         root: NGe.rootUnit,
         extent: new OpenLayers.Bounds(4108911.9527615,7430730.8105945,4261786.0093105,7583604.8671435)
     };
-    NGe.updateBreadcrumb();    
+    NGe.updateBreadcrumb();
 
+    //Переход к УИК, переданному в URL
+    var uik = OpenLayers.Util.getParameters().uik;
+    if (uik !== undefined) {NGe.autoLouad(uik)}
 }
 
 
@@ -257,50 +271,12 @@ function showTooltip(f) {
                 </div><span class='arrow'></span></div>"
             );
         }
-        
+
         api.show();
 }
 
 function hideTooltip() {
     if (api !== undefined) {api.hide();}
-}
-
-function panIntoView(tt) {
-
-    var mapWidth  = $('#map').width(),
-        mapHeight = $('#map').height(),
-        tooltipWidth  = tt.width(),
-        tooltipHeight = tt.height(),
-        tooltipLeft = tt.position().left,
-        tooltipTop = tt.position().top,
-        mapLeft = $('#map').position().left,
-        mapTop = $('#map').position().top,
-        paddingForTooltip = new OpenLayers.Bounds(10, 10, 10, 10),
-        origTL = new OpenLayers.Pixel(parseInt(tooltipLeft, 10), parseInt(tooltipTop, 10)),
-        newTL = origTL.clone(),
-        dx,
-        dy;
-    
-    //Сдвиг по горизонтали
-    if (origTL.x < mapLeft + paddingForTooltip.left) {
-        newTL.x = mapLeft + paddingForTooltip.left;
-    } else if ((origTL.x + tooltipWidth) > (mapLeft + mapWidth - paddingForTooltip.right)) {
-        newTL.x = mapLeft + mapWidth - tooltipWidth - paddingForTooltip.right;
-    }
-
-    //Сдвиг по вертикали
-    if (origTL.y < mapTop + paddingForTooltip.top) {
-        newTL.y = mapTop + paddingForTooltip.top;
-    } else if ((origTL.y + tooltipHeight) > (mapTop + mapHeight - paddingForTooltip.bottom)) {
-        newTL.y = mapTop + mapHeight - tooltipHeight - paddingForTooltip.bottom;
-    }
-
-    dx = origTL.x - newTL.x;
-    dy = origTL.y - newTL.y;
-
-    tt.animate({'marginLeft' : -dx, 'marginTop': -dy});
-    map.pan(dx, dy);
-
 }
 
 
@@ -317,8 +293,7 @@ function showttForMouse(e) {
 }
 
 $(document).ready(function() {
-    
-    
+
     $('#mapcont .menu li').not('.title').click(function() {
         $('.switch').removeClass('sel');
         $(this).addClass('sel');
