@@ -102,16 +102,16 @@
                 </ul>
             </div>
 
-            <p id="nextgis_logo"><a href="http://nextgis.ru/"><img src="http://nextgis.ru/wp-content/themes/nextgis/images/logo.png" border="0" width="200" height="43"/></a></p>
+            <p id="nextgis_logo"><a href="http://nextgis.ru/"  target="_blank"><img src="http://nextgis.ru/wp-content/themes/nextgis/images/logo.png" border="0" width="200" height="43"/></a></p>
                 
         </div>
 
         <div id="help">
             <p>Щелкайте по объектам для перехода на другой уровень. Наведите мышь, чтобы увидеть сводные результаты. Используйте панель навигации над картой чтобы переходить на предыдущие уровни.</p>
 
-            <p>Результаты выборов: <a href="http://www.moscow_city.vybory.izbirkom.ru/">Мосизбирком</a><br/>
-            Протоколы наблюдателей: <a href="http://nabludatel.org/">Гражданин-наблюдатель</a>, <a href="http://forbes.ru">Forbes</a><br/>
-            Картоснова: Участники <a href="http://osm.org/">OpenStreetMap<a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a>
+            <p>Результаты выборов: <a href="http://www.moscow_city.vybory.izbirkom.ru/" target="_blank">Мосизбирком</a><br/>
+            Протоколы наблюдателей: <a href="http://nabludatel.org/" target="_blank">Гражданин-наблюдатель</a>, <a href="http://forbes.ru" target="_blank">Forbes</a><br/>
+            Картоснова: Участники <a href="http://osm.org/"  target="_blank">OpenStreetMap<a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA 2.0</a>
             </p>
 
             <p><b>Внимание:</b> данные из протоколов наблюдателей в процессе ввода!</p>
