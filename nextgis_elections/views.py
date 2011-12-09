@@ -37,7 +37,7 @@ def data(request):
     root = int(request.params['root']) if 'root' in request.params else None
     depth = int(request.params['depth']) if 'depth' in request.params else 1
     level = int(request.params['level']) if 'level' in request.params else None
-
+    special = request.params['special'] if 'special' in request.params else None
 
     filter = []
 
@@ -69,14 +69,30 @@ def data(request):
     q_unit = dbsession.query(Unit, e_geom.label('geom')).options(joinedload(Unit.protocol_o), joinedload(Unit.protocol_i)).filter(Unit.id.in_(child_id)) \
         .outerjoin((t_geom, t_geom.unit_id == Unit.id))
 
-    print q_unit
-
     if level:
         q_unit = q_unit.filter(Unit.level == level)
 
     features = []
 
     for record in q_unit.all():
+        if special == 'diff':
+            
+            if not record.Unit.protocol_i or not record.Unit.protocol_o: continue
+
+            keep = False
+
+            check = dict()
+            for i in record.Unit.protocol_o.vote:
+                check[i.party_id] = i.vote_c
+
+            for i in record.Unit.protocol_i.vote:
+                if check[i.party_id] != i.vote_c:
+                    keep = True
+                    break
+
+            if not keep: continue
+
+
         properties = dict(protocol_o=record.Unit.protocol_o.as_dict() if record.Unit.protocol_o else None,
                           protocol_i=record.Unit.protocol_i.as_dict() if record.Unit.protocol_i else None,
                           unit=record.Unit.as_dict())

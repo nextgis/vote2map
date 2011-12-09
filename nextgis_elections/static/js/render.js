@@ -3,9 +3,7 @@ NGe.setRenderer = function (renderer, args) {
     if (args == undefined) { args = {}; };
 
     for (var i in NGe.tlayer) {
-        if (i <= 4) {
-            NGe.setLayerRenderer(NGe.tlayer[i], renderer, args);
-        };
+        NGe.setLayerRenderer(NGe.tlayer[i], renderer, args);
     };
 
     NGe.currentRenderer = renderer;
@@ -84,7 +82,7 @@ NGe.render.partyVote = function (layer, args) {
         }
     };
 
-    if (layer == NGe.tlayer[4]) {
+    if (layer == NGe.tlayer[4] || layer == NGe.tlayer.diff) {
         var template = {
             graphicName: "${getGraphicName}",
             pointRadius: 6,
@@ -158,7 +156,7 @@ NGe.render.presence = function (layer, args) {
         }
     };
 
-    if (layer == NGe.tlayer[4]) {
+    if (layer == NGe.tlayer[4] || layer == NGe.tlayer.diff) {
         var template = {
             graphicName: "${getGraphicName}",
             pointRadius: 6,
@@ -230,7 +228,7 @@ NGe.render.invalid = function (layer, args) {
         }
     };
 
-    if (layer == NGe.tlayer[4]) {
+    if (layer == NGe.tlayer[4] || layer == NGe.tlayer.diff) {
         var template = {
             graphicName: "${getGraphicName}",
             pointRadius: 6,
@@ -302,7 +300,7 @@ NGe.render.abs = function (layer, args) {
         }
     };
 
-    if (layer == NGe.tlayer[4]) {
+    if (layer == NGe.tlayer[4] || layer == NGe.tlayer.diff) {
         var template = {
             graphicName: "${getGraphicName}",
             pointRadius: 6,

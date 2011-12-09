@@ -33,11 +33,15 @@ NGe.setLevel = function (level, root) {
     // собираем ссылку
     var geom = 'polygon';
     if (level == 4) { geom = 'point'; };
-    var url = NGe.routes.data + '?srs=900913&geom=' + geom + '&root=' + root ;
+    var url = NGe.routes.data + '?srs=900913&geom=' + geom + '&root=' + root;
+
+    if (level == 'diff') {     
+        url = NGe.routes.data + '?srs=900913&geom=point&depth=4&level=4&special=diff';
+    };
 
     // выбранный слой
     var layer;
-    if (level >=2 & level <=4 & NGe.tlayer[level] == undefined) {
+    if (((level >=2 & level <=4) || level == 'diff') && NGe.tlayer[level] == undefined) {
         // инициализируем слой
         layer = new OpenLayers.Layer.Vector("layer" + level, {
             rendererOptions: {zIndexing: true},

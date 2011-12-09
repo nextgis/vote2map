@@ -121,6 +121,7 @@ Protocol.vote = relation(ProtocolVote,
     primaryjoin=and_(Protocol.unit_id == ProtocolVote.unit_id, Protocol.source == ProtocolVote.source),
     foreign_keys=(ProtocolVote.unit_id, ProtocolVote.source),
     uselist=True,
+    order_by=(ProtocolVote.party_id),
     lazy='joined')
 
 Unit.protocol_o = relation(Protocol,
