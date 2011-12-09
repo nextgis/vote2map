@@ -103,7 +103,7 @@ NGe.gotoUnit = function (unit) {
     };
 };
 
-NGe.autoLouad = function(item) {
+NGe.autoLoad = function(item) {
 
     OpenLayers.Request.GET({
         url: NGe.routes.unitSearch + '?srs=900913&term=' + item,
@@ -207,7 +207,7 @@ function init() {
 
     //Переход к УИК, переданному в URL
     var uik = OpenLayers.Util.getParameters().uik;
-    if (uik !== undefined) {NGe.autoLouad(uik)}
+    if (uik !== undefined) {NGe.autoLoad(uik)}
 }
 
 
