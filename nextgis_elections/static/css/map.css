@@ -261,6 +261,7 @@ margin:0 0 10px 0;
     text-transform:uppercase;
     font-size:12px;
     border-bottom:3px solid #CCC;
+    cursor:default;
 }
 
 #panel ul.menu li.switch:hover {

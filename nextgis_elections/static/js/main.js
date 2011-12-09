@@ -317,7 +317,7 @@ function showttForMouse(e) {
 $(document).ready(function() {
     
     
-    $('#mapcont .menu li').click(function() {
+    $('#mapcont .menu li').not('.title').click(function() {
         $('.switch').removeClass('sel');
         $(this).addClass('sel');
         $(this).children('input').change();
