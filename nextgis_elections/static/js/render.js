@@ -59,8 +59,8 @@ NGe.render.partyVote = function (layer, args) {
     var class_x = ranges;
 
     var colors = NGe.colorGradientSteps('#eeeeee', NGe.parties[args.party_id].color, Math.floor(series.ranges.length*2));
-
-    series.setColors(colors.splice(0, series.ranges.length));
+    colors = colors.splice(series.ranges.length - 1, series.ranges.length);
+    series.setColors(colors);
 
     getClass = function (val, a) {
         for (var i = 0; i < a.length; i += 1) {
@@ -133,7 +133,6 @@ NGe.render.presence = function (layer, args) {
     var class_x = ranges;
 
     var colors = NGe.colorGradientSteps('#e2dee6', '#3d2e4e', series.ranges.length);
-
     series.setColors(colors);
 
     getClass = function (val, a) {
@@ -205,7 +204,6 @@ NGe.render.invalid = function (layer, args) {
     var class_x = ranges;
 
     var colors = NGe.colorGradientSteps('#ff99ff', '#ff33ff', series.ranges.length);
-
     series.setColors(colors);
 
     getClass = function (val, a) {
@@ -277,7 +275,6 @@ NGe.render.abs = function (layer, args) {
     var class_x = ranges;
 
     var colors = NGe.colorGradientSteps('#99eeee', '#33eeee', series.ranges.length);
-
     series.setColors(colors);
 
     getClass = function (val, a) {
