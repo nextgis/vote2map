@@ -127,7 +127,7 @@ def unit_search(request):
         .outerjoin((UnitPolygon, UnitPolygon.unit_id == Unit.id)) \
         .outerjoin((UnitPoint, UnitPoint.unit_id == Unit.id)) \
         .filter(Unit.name.ilike('%' + q + '%')) \
-        .order_by(Unit.name).limit(10)
+        .order_by(Unit.id_level4, Unit.name).limit(10)
 
 
     rows = []
