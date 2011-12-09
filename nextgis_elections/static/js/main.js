@@ -122,11 +122,9 @@ function init() {
     
     
     geojson_format = new OpenLayers.Format.GeoJSON();
-    //OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
 
     map = new OpenLayers.Map('map', {
         maxExtent: new OpenLayers.Bounds(4133471.04,7457808.76,4226219.99,7562641.88),
-        //restrictedExtent: new OpenLayers.Bounds(4133471.04,7457808.76,4226219.99,7562641.88),
         projection: new OpenLayers.Projection("EPSG:900913"),
         displayProjection: new OpenLayers.Projection("EPSG:900913"),
         controls: [
@@ -310,7 +308,9 @@ function showttForMouse(e) {
     if (e.pageX || e.pageY) {
         x = e.pageX;
         y = e.pageY;
-        $('.tooltip').css({ 'left': (x - 210) + 'px', 'top': (y - 275) + 'px'});
+        if ((x > $('#map').position().left) && (x < $('#map').position().left + $('#map').width()) && (y > $('#map').position().top) && (y < $('#map').position().top + $('#map').height())) {
+            $('.tooltip').css({ 'left': (x - 210) + 'px', 'top': (y - 275) + 'px'});
+        }
     }
 }
 
