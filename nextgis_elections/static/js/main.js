@@ -99,7 +99,6 @@ NGe.gotoUnit = function (unit) {
         NGe.updateBreadcrumb();
 
         NGe.map.setCenter(new OpenLayers.LonLat(unit.x, unit.y), 17);
-        NGe.map.redraw();
     };
 };
 
