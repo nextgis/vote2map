@@ -110,8 +110,8 @@
             <p>Щелкайте по объектам для перехода на другой уровень. Наведите мышь, чтобы увидеть сводные результаты. Используйте панель навигации над картой чтобы переходить на предыдущие уровни.</p>
 
             <p>Результаты выборов: <a href="http://www.moscow_city.vybory.izbirkom.ru/" target="_blank">Мосизбирком</a><br/>
-            Протоколы наблюдателей: <a href="http://nabludatel.org/" target="_blank">Гражданин-наблюдатель</a>, <a href="http://forbes.ru" target="_blank">Forbes</a><br/>
-            Картоснова: Участники <a href="http://osm.org/"  target="_blank">OpenStreetMap<a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA 2.0</a>
+            Протоколы наблюдателей: <a href="http://nabludatel.org/" target="_blank">Гражданин-наблюдатель</a>; <a href="http://forbes.ru" target="_blank">Forbes</a><br/>
+            Картоснова: Участники <a href="http://osm.org/"  target="_blank">OpenStreetMap<a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA 2.0</a>; <a href="http://gis-lab.info/qa/osm-adm.html" target="_blank">GIS-Lab</a>
             </p>
 
             <p><b>Внимание:</b> данные из протоколов наблюдателей в процессе ввода!</p>
