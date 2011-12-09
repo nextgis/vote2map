@@ -310,6 +310,8 @@ function showttForMouse(e) {
         y = e.pageY;
         if ((x > $('#map').position().left) && (x < $('#map').position().left + $('#map').width()) && (y > $('#map').position().top) && (y < $('#map').position().top + $('#map').height())) {
             $('.tooltip').css({ 'left': (x - 210) + 'px', 'top': (y - 275) + 'px'});
+        } else {
+            hideTooltip();
         }
     }
 }
