@@ -203,7 +203,7 @@ NGe.render.invalid = function (layer, args) {
     var ranges = series.ranges;
     var class_x = ranges;
 
-    var colors = NGe.colorGradientSteps('#ff99ff', '#ff33ff', series.ranges.length);
+    var colors = NGe.colorGradientSteps('#fde0dd', '#c51b8a', series.ranges.length);
     series.setColors(colors);
 
     getClass = function (val, a) {
@@ -274,7 +274,7 @@ NGe.render.abs = function (layer, args) {
     var ranges = series.ranges;
     var class_x = ranges;
 
-    var colors = NGe.colorGradientSteps('#99eeee', '#33eeee', series.ranges.length);
+    var colors = NGe.colorGradientSteps('#efedf5', '#756bb1', series.ranges.length);
     series.setColors(colors);
 
     getClass = function (val, a) {
