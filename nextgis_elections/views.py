@@ -15,6 +15,7 @@ from nextgis_elections.models import DBSession
 from nextgis_elections.models import Unit
 from nextgis_elections.models import UnitPolygon
 from nextgis_elections.models import UnitPoint
+from nextgis_elections.models import UnitStat
 from nextgis_elections.models import Party
 
 def home(request):
@@ -37,7 +38,6 @@ def data(request):
     root = int(request.params['root']) if 'root' in request.params else None
     depth = int(request.params['depth']) if 'depth' in request.params else 1
     level = int(request.params['level']) if 'level' in request.params else None
-    special = request.params['special'] if 'special' in request.params else None
 
     filter = []
 
@@ -75,24 +75,6 @@ def data(request):
     features = []
 
     for record in q_unit.all():
-        if special == 'diff':
-            
-            if not record.Unit.protocol_i or not record.Unit.protocol_o: continue
-
-            keep = False
-
-            check = dict()
-            for i in record.Unit.protocol_o.vote:
-                check[i.party_id] = i.vote_c
-
-            for i in record.Unit.protocol_i.vote:
-                if check[i.party_id] != i.vote_c:
-                    keep = True
-                    break
-
-            if not keep: continue
-
-
         properties = dict(protocol_o=record.Unit.protocol_o.as_dict() if record.Unit.protocol_o else None,
                           protocol_i=record.Unit.protocol_i.as_dict() if record.Unit.protocol_i else None,
                           unit=record.Unit.as_dict())
@@ -146,5 +128,23 @@ def unit_search(request):
 
     return rows
 
-        
+def unit_browse(request):
 
+    dbsession = DBSession()
+
+    units = dbsession.query(Unit, UnitStat).filter_by(level=4).order_by(Unit.name) \
+        .join((UnitStat, Unit.stat)) 
+
+    if 'independent' in request.GET:
+        units = units.filter(UnitStat.independent == True)
+    if 'diff' in request.GET:
+        units = units.filter(UnitStat.diff == True)
+    
+    return dict(units=units)
+
+def unit_update_stat(request):
+    from nextgis_elections.models import unit_update_stat
+
+    unit_update_stat()
+
+    return Response('OK', content_type='text/plain')

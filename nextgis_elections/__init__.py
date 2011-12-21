@@ -24,6 +24,13 @@ def main(global_config, **settings):
     config.add_route('unit.search', '/unit/search')
     config.add_view('nextgis_elections.views.unit_search', route_name='unit.search', renderer='json')
 
+    config.add_route('unit.browse', '/unit')
+    config.add_view('nextgis_elections.views.unit_browse', route_name='unit.browse', renderer='browse.mako')
+
+    config.add_route('unit.update_stat', '/unit/update_stat')
+    config.add_view('nextgis_elections.views.unit_update_stat', route_name='unit.update_stat')
+
+
     # config.add_route('home', '/')
     # config.add_view('nextgis_elections.views.my_view',
     #                 route_name='home',

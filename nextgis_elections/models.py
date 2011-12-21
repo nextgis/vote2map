@@ -6,6 +6,7 @@ from sqlalchemy import Integer
 from sqlalchemy import BigInteger
 from sqlalchemy import Float
 from sqlalchemy import Unicode
+from sqlalchemy import Boolean
 from sqlalchemy import and_
 
 from geoalchemy import GeometryColumn
@@ -19,6 +20,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import relation, backref
+from sqlalchemy.orm import joinedload
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
@@ -40,6 +42,7 @@ class Unit(Base):
     url = Column(Unicode)
 
     parent = relation('Unit', remote_side=[id], uselist=False, backref=backref('child', uselist=True))
+    stat = relation('UnitStat', uselist=False)
 
     def as_dict(self):
         result = dict(id=self.id, name=self.name, level=self.level, parent_id=self.parent_id)
@@ -62,6 +65,14 @@ class UnitPoint(Base):
     unit = relation(Unit, uselist=False)
 
 GeometryDDL(UnitPoint.__table__)
+
+class UnitStat(Base):
+    __tablename__ = 'unit_stat'
+    unit_id = Column(BigInteger, ForeignKey('unit.id'), primary_key=True)
+    official = Column(Boolean)
+    independent = Column(Boolean)
+    diff = Column(Boolean)
+    diff_value = Column(Integer)
 
 class Party(Base):
     __tablename__ = 'party'
@@ -146,3 +157,32 @@ def initialize_sql(engine):
         populate()
     except IntegrityError:
         transaction.abort()
+
+
+def unit_update_stat():
+    dbsession = DBSession()
+
+    units = dbsession.query(Unit).options(joinedload(Unit.protocol_o), joinedload(Unit.protocol_i))
+    dbsession.query(UnitStat).delete()
+
+    for unit in units:
+        stat = UnitStat(unit_id=unit.id)
+        stat.official = unit.protocol_o != None    
+        stat.independent = unit.protocol_i != None    
+        stat.diff = False
+        stat.diff_value = 0
+
+        if unit.protocol_i and unit.protocol_o:
+
+            check = dict()
+            for i in unit.protocol_o.vote:
+                check[i.party_id] = i.vote_c
+
+            for i in unit.protocol_i.vote:
+                if check[i.party_id] != i.vote_c:
+                    stat.diff_value += abs(i.vote_c - i.party_id)
+                    stat.diff = True
+        
+        dbsession.add(stat)
+
+    dbsession.add(stat)
