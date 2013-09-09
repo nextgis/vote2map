@@ -6,7 +6,7 @@ import csv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from nextgis_elections.models import Unit, Protocol, ProtocolVote
+from vote2map.models import Unit, Protocol, ProtocolVote
 
 conn = sys.argv[1]
 engine = create_engine(conn, echo=False)
@@ -14,6 +14,7 @@ dbsession = sessionmaker(bind=engine)()
 
 f = csv.reader(sys.stdin, delimiter=',', quotechar='"')
 head = f.next()
+
 
 fieldmap = (
     (1, "Число избирателей, внесенных в список избирателей", 'v_count'),
@@ -36,6 +37,7 @@ fieldmap = (
     (18, "Число избирательных бюллетеней, не учтенных при получении", 'b_wtf')
 )
 
+
 votemap = (
     (19, "1. Политическая партия СПРАВЕДЛИВАЯ РОССИЯ", 1),
     (20, "2. Политическая партия \"Либерально-демократическая партия России\"", 2),
@@ -45,7 +47,6 @@ votemap = (
     (24, '6. Всероссийская политическая партия "ЕДИНАЯ РОССИЯ"', 6),
     (25, '7. Всероссийская политическая партия "ПРАВОЕ ДЕЛО"', 7)
 )
-
 
 
 for row in f:

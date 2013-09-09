@@ -27,7 +27,9 @@ from zope.sqlalchemy import ZopeTransactionExtension
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
+
 class UnitPolygon: pass
+
 
 class Unit(Base):
     __tablename__ = 'unit'
@@ -48,6 +50,7 @@ class Unit(Base):
         result = dict(id=self.id, name=self.name, level=self.level, parent_id=self.parent_id)
         return result
 
+
 class UnitPolygon(Base):
     __tablename__ = 'unit_polygon'
     unit_id = Column(BigInteger, ForeignKey('unit.id'), primary_key=True)
@@ -56,6 +59,7 @@ class UnitPolygon(Base):
     unit = relation(Unit, uselist=False)
 
 GeometryDDL(UnitPolygon.__table__)
+
 
 class UnitPoint(Base):
     __tablename__ = 'unit_point'
@@ -66,6 +70,7 @@ class UnitPoint(Base):
 
 GeometryDDL(UnitPoint.__table__)
 
+
 class UnitStat(Base):
     __tablename__ = 'unit_stat'
     unit_id = Column(BigInteger, ForeignKey('unit.id'), primary_key=True)
@@ -73,6 +78,7 @@ class UnitStat(Base):
     independent = Column(Boolean)
     diff = Column(Boolean)
     diff_value = Column(Integer)
+
 
 class Party(Base):
     __tablename__ = 'party'
@@ -120,6 +126,7 @@ class Protocol(Base):
 
         return result
 
+
 class ProtocolVote(Base):
     __tablename__ = 'protocol_vote'
     unit_id = Column(BigInteger, primary_key=True)
@@ -148,6 +155,7 @@ Unit.protocol_i = relation(Protocol,
 
 def populate():
     pass
+
 
 def initialize_sql(engine):
     DBSession.configure(bind=engine)

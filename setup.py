@@ -17,15 +17,16 @@ requires = [
     'zope.sqlalchemy',
     'geoalchemy',
     'geojson',
-    'shapely'
+    'shapely',
+    'waitress'
     ]
 
 if sys.version_info[:3] < (2,5,0):
     requires.append('pysqlite')
 
-setup(name='nextgis_elections',
+setup(name='vote2map',
       version='0.0',
-      description='nextgis_elections',
+      description='vote2map',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -40,11 +41,11 @@ setup(name='nextgis_elections',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      test_suite='nextgis_elections',
+      test_suite='vote2map',
       install_requires = requires,
       entry_points = """\
       [paste.app_factory]
-      main = nextgis_elections:main
+      main = vote2map:main
       """,
       paster_plugins=['pyramid'],
       )

@@ -1,2 +1,2 @@
 include *.txt *.ini *.cfg *.rst
-recursive-include nextgis_elections *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml
+recursive-include vote2map *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml

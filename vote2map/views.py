@@ -11,12 +11,12 @@ from sqlalchemy.sql.expression import distinct
 from shapely.wkt import loads as loads_wkt
 from geojson import FeatureCollection, Feature, dumps as dumps_geojson
 
-from nextgis_elections.models import DBSession
-from nextgis_elections.models import Unit
-from nextgis_elections.models import UnitPolygon
-from nextgis_elections.models import UnitPoint
-from nextgis_elections.models import UnitStat
-from nextgis_elections.models import Party
+from vote2map.models import DBSession
+from vote2map.models import Unit
+from vote2map.models import UnitPolygon
+from vote2map.models import UnitPoint
+from vote2map.models import UnitStat
+from vote2map.models import Party
 
 def home(request):
     dbsession = DBSession()
@@ -143,7 +143,7 @@ def unit_browse(request):
     return dict(units=units)
 
 def unit_update_stat(request):
-    from nextgis_elections.models import unit_update_stat
+    from vote2map.models import unit_update_stat
 
     unit_update_stat()
 

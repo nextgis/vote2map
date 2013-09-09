@@ -4,7 +4,7 @@ from pyramid import testing
 
 def _initTestingDB():
     from sqlalchemy import create_engine
-    from nextgis_elections.models import initialize_sql
+    from vote2map.models import initialize_sql
     session = initialize_sql(create_engine('sqlite://'))
     return session
 
@@ -17,8 +17,8 @@ class TestMyView(unittest.TestCase):
         testing.tearDown()
 
     def test_it(self):
-        from nextgis_elections.views import my_view
+        from vote2map.views import my_view
         request = testing.DummyRequest()
         info = my_view(request)
         self.assertEqual(info['root'].name, 'root')
-        self.assertEqual(info['project'], 'nextgis_elections')
+        self.assertEqual(info['project'], 'vote2map')

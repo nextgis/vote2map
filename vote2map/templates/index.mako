@@ -6,24 +6,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="${request.static_url('nextgis_elections:static/css/map.css')}" type="text/css">
-    <link rel="stylesheet" href="${request.static_url('nextgis_elections:static/jquery/css/smoothness/jquery-ui-1.8.16.custom.css')}" type="text/css">
+    <link rel="stylesheet" href="${request.static_url('vote2map:static/css/map.css')}" type="text/css">
+    <link rel="stylesheet" href="${request.static_url('vote2map:static/jquery/css/smoothness/jquery-ui-1.8.16.custom.css')}" type="text/css">
  
     <!-- jQuery Tools library -->
-    <script src="${request.static_url('nextgis_elections:static/jquery/js/jquery-1.6.2.min.js')}"></script>
-    <script src="${request.static_url('nextgis_elections:static/jquery/js/jquery-ui-1.8.16.custom.min.js')}"></script>
-    <script src="${request.static_url('nextgis_elections:static/jquery/js/jquery.tools.min.js')}"></script>
+    <script src="${request.static_url('vote2map:static/jquery/js/jquery-1.6.2.min.js')}"></script>
+    <script src="${request.static_url('vote2map:static/jquery/js/jquery-ui-1.8.16.custom.min.js')}"></script>
+    <script src="${request.static_url('vote2map:static/jquery/js/jquery.tools.min.js')}"></script>
 
     <!-- OpenLayers library -->
-    <script src="${request.static_url('nextgis_elections:static/openlayers/OpenLayers.js')}"></script>
+    <script src="${request.static_url('vote2map:static/openlayers/OpenLayers.js')}"></script>
     <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js" type="text/javascript"></script>
 
     <!-- geostats library -->
-    <script src="${request.static_url('nextgis_elections:static/geostat/geostats.js')}"></script>
+    <script src="${request.static_url('vote2map:static/geostat/geostats.js')}"></script>
 
     <!-- Main section -->
-    <script src="${request.static_url('nextgis_elections:static/js/main.js')}" type="text/javascript"></script>
-    <script src="${request.static_url('nextgis_elections:static/js/render.js')}" type="text/javascript"></script>
+    <script src="${request.static_url('vote2map:static/js/main.js')}" type="text/javascript"></script>
+    <script src="${request.static_url('vote2map:static/js/render.js')}" type="text/javascript"></script>
     <script src="${request.route_url('setup_js')}" type="text/javascript"></script>
 
 

@@ -1,1 +1,1 @@
-nextgis_elections README
+vote2map README
