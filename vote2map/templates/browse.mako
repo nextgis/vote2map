@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>Elections map</title>
+    <title>Карта выборов мэра Москвы (2013)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <style type="text/css">

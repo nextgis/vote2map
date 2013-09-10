@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>Elections map</title>
+    <title>Карта выборов мэра Москвы (2013)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <!-- CSS -->
@@ -46,7 +46,7 @@
         <div id="panel">
 
             <ul class="menu party">
-                <li class="title">Голосование по партиям</li>
+                <li class="title">Голосование по кандидатам</li>
 
                 %for party in parties:
                     <li class="switch icon p_party_${party.id}">
