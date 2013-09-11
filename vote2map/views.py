@@ -18,10 +18,12 @@ from vote2map.models import UnitPoint
 from vote2map.models import UnitStat
 from vote2map.models import Party
 
+
 def home(request):
     dbsession = DBSession()
 
     return dict(parties=dbsession.query(Party).order_by(Party.id).all())
+
 
 def setup_js(request):
     dbsession = DBSession()

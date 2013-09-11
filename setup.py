@@ -8,7 +8,7 @@ README = open(os.path.join(here, 'README.txt')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
-    'pyramid==1.4',
+    'pyramid',
     'SQLAlchemy',
     'psycopg2',
     'transaction',
@@ -46,6 +46,8 @@ setup(name='vote2map',
       entry_points = """\
       [paste.app_factory]
       main = vote2map:main
+      [console_scripts]
+      initialize_vote2map_db = vote2map.scripts.initializedb:main
       """,
       paster_plugins=['pyramid'],
       )

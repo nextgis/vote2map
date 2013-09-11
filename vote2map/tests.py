@@ -1,12 +1,13 @@
 import unittest
-from pyramid.config import Configurator
 from pyramid import testing
+
 
 def _initTestingDB():
     from sqlalchemy import create_engine
     from vote2map.models import initialize_sql
     session = initialize_sql(create_engine('sqlite://'))
     return session
+
 
 class TestMyView(unittest.TestCase):
     def setUp(self):
